@@ -1,21 +1,24 @@
 {
     "name": "oonne/yii2-webuploader",
-    "description": "基于WebUploader的Yii2大文件上传扩展",
-    "keywords": ["yii2","upload","webuploader","oonne"],
+    "description": "Yii2 extension for large file chunk upload. Base on WebUploader.",
+    "keywords": ["yii2", "extension","upload","webuploader","widget"],
     "type": "yii2-extension",
     "license": "MIT",
+    "support": {
+        "source": "https://github.com/oonne/yii2-webuploader",
+        "issues": "https://github.com/oonne/yii2-webuploader/issues"
+    },
     "authors": [
         {
             "name": "JAY",
-            "email": "JAY@oonne.com"
+            "email": "JAY@oonne.com",
+            "homepage": "https://www.oonne.com"
         }
     ],
     "require": {
         "yiisoft/yii2": "*"
     },
     "autoload": {
-        "psr-4": {
-            "oonne\\webuploader\\": ""
-        }
+        "psr-4": { "oonne\\webuploader\\": ""}
     }
 }
