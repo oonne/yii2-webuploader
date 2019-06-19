@@ -28,20 +28,21 @@ class Upload extends WebUploader
 	 */
 	public function run()
 	{
-		$this->registerClientScript($this->url);
-		return $this->render('upload');
+		// 生成随机id，允许在同个页面中使用多个示例
+		$hash = rand(10000, 99999);
+
+		$this->registerClientScript($this->url, $hash);
+		return $this->render('upload', ['hash'=>$hash]);
 	}
 
 	/**
 	 * Registers Webuploader assets
 	 */
-	protected function registerClientScript($url)
+	protected function registerClientScript($url, $hash)
 	{
 		$view = $this->getView();
 		UploadAsset::register($view);
-		$js = "
-            var uploadUrl = '".$url."';
-        ";
-		$view->registerJs($js, $view::POS_HEAD);
+		$js = "initUploader('".$url."', ".$hash.")";
+		$view->registerJs($js, $view::POS_READY);
 	}
 }

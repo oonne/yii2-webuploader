@@ -118,7 +118,7 @@ class UploadServer
             flock($out, LOCK_UN);
         }
         @fclose($out);
-        $size = filesize($outPath);
+        // $size = filesize($outPath);
 
         // 文件合并完成，返回结果
         return [

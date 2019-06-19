@@ -1,10 +1,9 @@
-jQuery(function() {
-    var url = uploadUrl || 'upload';
-    var  uploader;
+function initUploader(url, hash) {
+    var uploader;
     uploader = WebUploader.create({
        resize: false, // 不压缩image      
        server: url, // 文件接收服务端。 
-       pick: '#filePicker',// 选择文件的按钮。可选。内部根据当前运行是创建，可能是input元素，也可能是flash.
+       pick: '#filePicker_'+hash,// 选择文件的按钮。可选。内部根据当前运行是创建，可能是input元素，也可能是flash.
        chunked: true,//允许分片上传
        chunkSize: 1*1024*1024,//每个分片大小
        auto: true, //是否自动上传
@@ -23,7 +22,7 @@ jQuery(function() {
          console.log('文件准备上传')
     });
     uploader.on( 'fileQueued', function( file ) { //文件加入队列后触发
-         var $list = $("#fileList"),
+         var $list = $("#fileList_"+hash),
          $li = $(
          '<div id="' + file.id + '" class="file-item thumbnail">' + '<img>'+ '<div class="info">' + file.name + '</div>' + '</div>'
          );     
@@ -33,21 +32,19 @@ jQuery(function() {
     // 文件上传过程中创建进度实时显示。
     uploader.on( 'uploadProgress', function( file, percentage ) {
         var ss = (percentage*100).toFixed(2);
-        $("#progress").attr('aria-valuenow', ss);
-        $("#progress").width(ss+"%");
-        $("#progress").text(ss+"%");
+        $("#progress_"+hash).attr('aria-valuenow', ss);
+        $("#progress_"+hash).width(ss+"%");
+        $("#progress_"+hash).text(ss+"%");
     });
        
     // 文件上传成功
-    uploader.on( 'uploadSuccess', function( file, res ) {
-         alert("文件上传成功");
-         console.log(res.filePaht); //这里可以得到上传后的文件路径
-    });
-    uploader.on( 'uploadError', function( file, res ) {
-         alert("文件上传失败");
-    });
-    uploader.on( 'uploadComplete', function( file, res ) {
+    uploader.on( 'uploadComplete', function( file ) {
          console.log('上传完成')
     });
-
-});
+    uploader.on( 'uploadSuccess', function( file ) {
+         alert("文件上传成功");
+    });
+    uploader.on( 'uploadError', function( file ) {
+         alert("文件上传失败");
+    });
+};
