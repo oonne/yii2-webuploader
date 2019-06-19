@@ -1,4 +1,8 @@
 function initUploader(url, hash) {
+    var $fileList = $("#fileList_"+hash);
+    var $progress = $("#progress_"+hash);
+    var $pickBtn = $("#filePicker_"+hash);
+
     var uploader;
     uploader = WebUploader.create({
        resize: false, // 不压缩image      
@@ -7,8 +11,8 @@ function initUploader(url, hash) {
        chunked: true,//允许分片上传
        chunkSize: 1*1024*1024,//每个分片大小
        auto: true, //是否自动上传
-       duplicate:true, //去除重复
-       fileNumLimit:500, //上传文件个数限制  
+       duplicate: true, //去除重复
+       fileNumLimit: 500, //上传文件个数限制  
        fileSingleSizeLimit:500*1024*1024, //单个文件大小限制  500M
        accept: {
          title: '文字描述', //文字描述
@@ -19,32 +23,33 @@ function initUploader(url, hash) {
        }
     });
     uploader.on('uploadStart', function (file) {
-         console.log('文件准备上传')
+         // console.log('文件准备上传');
+         $pickBtn.hide();
     });
-    uploader.on( 'fileQueued', function( file ) { //文件加入队列后触发
-         var $list = $("#fileList_"+hash),
-         $li = $(
-         '<div id="' + file.id + '" class="file-item thumbnail">' + '<img>'+ '<div class="info">' + file.name + '</div>' + '</div>'
-         );     
-         // $list为容器jQuery实例
-         $list.append( $li );
+    uploader.on( 'fileQueued', function( file ) {
+         // console.log('文件加入队列');
+         $fileList.addClass('uploader-list').text( file.name );
     });
     // 文件上传过程中创建进度实时显示。
     uploader.on( 'uploadProgress', function( file, percentage ) {
         var ss = (percentage*100).toFixed(2);
-        $("#progress_"+hash).attr('aria-valuenow', ss);
-        $("#progress_"+hash).width(ss+"%");
-        $("#progress_"+hash).text(ss+"%");
+        $progress.attr('aria-valuenow', ss);
+        $progress.width(ss+"%");
+        $progress.text(ss+"%");
     });
        
     // 文件上传成功
-    uploader.on( 'uploadComplete', function( file ) {
-         console.log('上传完成')
+    uploader.on( 'uploadComplete', function( file, res ) {
+         console.log('上传完成');
     });
-    uploader.on( 'uploadSuccess', function( file ) {
-         alert("文件上传成功");
+    uploader.on( 'uploadSuccess', function( file, res ) {
+        alert("文件上传成功");
+        if (res['Ret']==0) {
+            $fileList.html('<a href='+res['Url']+'>'+res['Filename']+'</a>');
+        };
     });
-    uploader.on( 'uploadError', function( file ) {
+    uploader.on( 'uploadError', function( file, res ) {
          alert("文件上传失败");
+         $pickBtn.show();
     });
 };

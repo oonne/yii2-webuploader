@@ -3,5 +3,12 @@
 }
 
 .uploader-list{
-	
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow:hidden; 
+    text-overflow:ellipsis;
+    white-space:nowrap;
 }

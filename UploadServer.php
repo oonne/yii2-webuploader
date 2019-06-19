@@ -107,7 +107,7 @@ class UploadServer
         }
         if ( flock($out, LOCK_EX) ) {
             for( $i=0; $i<$chunks; $i++ ) {
-                if (!$in = @fopen($filePath.DIRECTORY_SEPARATOR.$fileName.'.'.$i.'.part', "rb")) {
+                if (!$in = @fopen($tempPath.DIRECTORY_SEPARATOR.$fileName.'.'.$i.'.part', "rb")) {
                     break;
                 }
                 while ($buff = fread($in, 4096)) {
@@ -118,7 +118,7 @@ class UploadServer
             flock($out, LOCK_UN);
         }
         @fclose($out);
-        // $size = filesize($outPath);
+        $size = filesize($outPath);
 
         // 文件合并完成，返回结果
         return [
