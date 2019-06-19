@@ -27,4 +27,53 @@ to the require section of your `composer.json` file.
 Usage
 -----
 
-TODO
+* Add Upload widget in the view, for example:
+```php
+<?php use oonne\scrollTop\ScrollTop; ?>
+<?= Upload::widget(['url'=>'/upload/upload]) ?>
+```
+Enter the service processing path in "url";
+
+* Add a upload controller, for example:
+```php
+<?php
+namespace backend\controllers;
+
+use Yii;
+use yii\web\Response;
+use yii\web\UploadedFile;
+use oonne\webuploader\UploadServer;
+
+class UploadController extends \yii\rest\Controller
+{
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['contentNegotiator']['formats'] = [
+            'application/json' => Response::FORMAT_JSON
+        ];
+        return $behaviors;
+    }
+
+    protected function verbs()
+    {
+        return [
+            'upload' => ['post'],
+        ];
+    }
+
+    public function actionUpload()
+    {
+        $fileData = Yii::$app->request->post();
+        $file = UploadedFile::getInstanceByName('file');
+        $fileRet = UploadServer::uploadFile($file, $fileData, Yii::$app->params['temppath'], Yii::$app->params['filepath']);
+
+        return [
+            'Ret' => 0,
+            'Filename' => $fileRet['file_name'],
+            'Url' => '$downloadUrl',
+        ];
+    }
+}
+
+```
