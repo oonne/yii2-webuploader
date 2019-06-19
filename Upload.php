@@ -9,9 +9,6 @@ namespace oonne\webuploader;
 use Yii;
 
 /**
- * 图片上传按钮
- * 在你想要出现“选择文件”的地方，放下如下代码：
- * <?= Upload::widget() ?>
  *
  * @author JAY <JAY@oonne.me>
  */
