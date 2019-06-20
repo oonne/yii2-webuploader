@@ -2,14 +2,13 @@
 /**
  * @link http://www.oonne.com/
  * @copyright Copyright (c) 2019 oonne
- * @license http://www.oonne.com/license/
  */
 namespace oonne\webuploader;
 
 use yii\web\AssetBundle;
 
 /**
- * @author JAY <JAY@oonne.me>
+ * @author JAY <JAY@oonne.com>
  */
 class UploadAsset extends AssetBundle
 {

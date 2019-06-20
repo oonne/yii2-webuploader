@@ -1,8 +1,7 @@
 <?php
 /**
- * @link http://www.oonne.com/
+ * @link http://www.oonne.com
  * @copyright Copyright (c) 2019 oonne
- * @license http://www.oonne.com
  */
 namespace oonne\webuploader;
 
@@ -10,7 +9,7 @@ use Yii;
 
 /**
  *
- * @author JAY <JAY@oonne.me>
+ * @author JAY <JAY@oonne.com>
  */
 class Upload extends WebUploader
 {

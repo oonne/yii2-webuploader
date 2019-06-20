@@ -6,7 +6,7 @@ use yii\web\UploadedFile;
 
 /**
  * Class UploadServer
- * @author JAY <JAY@oonne.me>
+ * @author JAY <JAY@oonne.com>
  */
 class UploadServer
 {

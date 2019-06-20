@@ -2,7 +2,6 @@
 /**
  * @link http://www.oonne.com/
  * @copyright Copyright (c) 2019 oonne
- * @license http://www.oonne.com/license/
  */
 
 namespace oonne\webuploader;
@@ -11,7 +10,7 @@ use Yii;
 use yii\base\Widget;
 
 /**
- * @author JAY <JAY@oonne.me>
+ * @author JAY <JAY@oonne.com>
  */
 class WebUploader extends Widget
 {
