@@ -43,10 +43,14 @@ function initUploader(url, hash) {
          console.log('上传完成');
     });
     uploader.on( 'uploadSuccess', function( file, res ) {
-        alert("文件上传成功");
         if (res['Ret']==0) {
             $fileList.html('<a href='+res['Url']+'>'+res['Filename']+'</a>');
         };
+        if (res['Callback']) {
+          eval(res['Callback']);
+        } else {
+          alert("文件上传成功");
+        }
     });
     uploader.on( 'uploadError', function( file, res ) {
          alert("文件上传失败");

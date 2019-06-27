@@ -69,11 +69,18 @@ class UploadController extends \yii\rest\Controller
         $file = UploadedFile::getInstanceByName('file');
         $fileRet = UploadServer::uploadFile($file, $fileData, Yii::$app->params['temppath'], Yii::$app->params['filepath']);
 
-        return [
-            'Ret' => 0,
-            'Filename' => $fileRet['file_name'],
-            'Url' => '$downloadUrl',
-        ];
+        if ($fileRet['ret'] == 0) {
+            return [
+                'Ret' => 0,
+                'Filename' => $fileRet['file_name'],
+                'Url' => '$downloadUrl',
+                'Callback' => 'location.reload(true)',
+            ];
+        } else {
+            return [
+                'Ret' => 1000,
+            ];    
+        }
     }
 }
 
