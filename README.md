@@ -30,8 +30,8 @@ Usage
 
 * Add Upload widget in the view, for example:
 ```php
-<?php use oonne\scrollTop\ScrollTop; ?>
-<?= Upload::widget(['url'=>'/upload/upload]) ?>
+<?php use oonne\webuploader\Upload; ?>
+<?= Upload::widget(['url'=>'/upload/upload']) ?>
 ```
 Enter the service processing path in "url";
 
