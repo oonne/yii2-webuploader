@@ -44,14 +44,16 @@ class UploadServer
         if ($chunks==1) {
             $hashStr = md5_file($file->tempName);
             $size = $file->size;
-            $name = $hashStr .'.'. $file->extension;
+            $extension = $file->extension;
+            $name = $hashStr .'.'. $extension;
             $filename = $filePath . DIRECTORY_SEPARATOR . $name;
             if ($file->saveAs($filename)) {
                 return [
                     'ret' => 0,
                     'ret_msg' => 'OK',
                     'file_name' => $name,
-                    'file_size' => $size,
+                    'file_extension' => $extension,
+                    'mime' => $file->type,
                     'mime' => $file->type,
                 ];
             } else {
